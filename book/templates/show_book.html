@@ -3,6 +3,7 @@
 
 <div style="width:80%; margin:auto;">
       <h1>List of books </h1>
+      {% if data %}
       <table class="table table-bordered">
             <thead>
               <tr>
@@ -25,10 +26,13 @@
                         <td>{{item.category}}</td>
                         <td>{{item.first_pub}}</td>
                         <td>{{item.last_pub}}</td>
-                        <td><a href="{% url 'edit_book' id=item.id %}" class='btn btn-warning btn-sm'>Edit</a> <a class='btn btn-danger btn-sm'>Delete</a></td>
+                        <td><a href="{% url 'edit_book' id=item.id %}" class='btn btn-warning btn-sm'>Edit</a> <a href="{% url 'delete_book' id=item.id %}" class='btn btn-danger btn-sm'>Delete</a></td>
                       </tr>
                   {% endfor %}
             </tbody>
           </table>
+          {% else %}
+          <h3>No data available.</h3>
+          {% endif %}
 </div>
 {% endblock %}
