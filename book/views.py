@@ -19,3 +19,13 @@ def show_books(request):
       book = BookStoreModel.objects.all()
       print(book)
       return render(request,'show_book.html', {'data' : book})
+
+def edit_book(request,id):
+      book=BookStoreModel.objects.get(pk =id)
+      form=BookStroreForm(instance=book)
+      if request.method == 'POST':
+            form = BookStroreForm(request.POST,instance=book)
+            if form.is_valid():
+                   form.save()
+                   redirect("show_books")     
+      return render(request, 'store_book.html', {'form' :form})
